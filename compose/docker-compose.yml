@@ -60,7 +60,7 @@ services:
     networks:
       - kong-net
     ports:
-      - "8000:8000/tcp"
+      - "8008:8000/tcp"
       - "8001:8001/tcp"
       - "8443:8443/tcp"
       - "8444:8444/tcp"
@@ -72,6 +72,7 @@ services:
     restart: on-failure
     
   db:
+    # docker run -it --rm --network compose_kong-net postgres:9.5 psql -h db -U kong
     image: postgres:9.5
     environment:
       POSTGRES_DB: ${KONG_PG_DATABASE:-kong}
@@ -89,3 +90,34 @@ services:
       - kong-net
     volumes:
       - kong_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+
+###
+# docker exec -it compose_db_1 bash
+# psql -U kong -w
+# CREATE DATABASE "konga" WITH ENCODING='UTF8';
+#
+# docker run --network compose_kong-net --rm pantsel/konga -c prepare -a postgres -u postgresql://kong:kong@db/konga
+#
+###
+
+  konga:
+    image: pantsel/konga:latest
+    restart: always
+    networks:
+        - kong-net
+    environment:
+      DB_ADAPTER: postgres
+      DB_HOST: db
+      DB_USER: kong
+      DB_PASSWORD: kong
+      TOKEN_SECRET: lm3GUr5RkcQDLDewhJP1XrCuZwcKmqkj
+      DB_DATABASE: konga
+      NODE_ENV: production
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "1337:1337"
