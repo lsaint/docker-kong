@@ -95,12 +95,18 @@ services:
 
 
 ###
+# for the first time to init konga, remove 'konga' section then run:
+#
+# 1)
 # docker exec -it compose_db_1 bash
 # psql -U kong -w
 # CREATE DATABASE "konga" WITH ENCODING='UTF8';
 #
+# 2)
 # docker run --network compose_kong-net --rm pantsel/konga -c prepare -a postgres -u postgresql://kong:kong@db/konga
 #
+# 3)
+# add 'konga' section below
 ###
 
   konga:
