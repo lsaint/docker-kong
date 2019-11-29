@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.com/Kong/docker-kong.svg?branch=master)](https://travis-ci.com/Kong/docker-kong)
 
+# docker-kong-compose+konga
+
 # About this Repo
 
 This is the Git repo of the Docker
