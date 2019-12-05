@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.com/Kong/docker-kong.svg?branch=master)](https://travis-ci.com/Kong/docker-kong)
 
 # docker-kong-compose+konga
+See ./compose/docker-compose.yml
 
 # About this Repo
 
