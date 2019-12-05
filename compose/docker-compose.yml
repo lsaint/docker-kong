@@ -95,7 +95,7 @@ services:
 
 
 ###
-# for the first time to init konga, remove 'konga' section then run:
+# for the first time to init konga:
 #
 # 1)
 # docker exec -it compose_db_1 bash
